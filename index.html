@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>菜单 · Carta | 富城 Restaurante Fortuna</title>
+  <title>Carta | Restaurante Fortuna</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap">
   <style>
     :root {
-      --color-primary: #B8392E;
-      --color-primary-dark: #8F2B22;
-      --color-gold: #D4A24A;
-      --color-gold-light: #E8C87A;
-      --color-ink: #1A1410;
-      --color-text: #2C1F17;
-      --color-text-secondary: #6B5D52;
-      --color-text-muted: #9A8B7E;
-      --color-bg: #F5EFE6;
-      --color-bg-warm: #EDE4D3;
-      --color-card: #FAF6EF;
-      --color-border: #D9CDBC;
-      --color-border-light: #E8DDCC;
+      --color-primary: #3A3A3A;
+      --color-primary-dark: #1F1F1F;
+      --color-gold: #C49A9A;
+      --color-gold-light: #E0C8C8;
+      --color-ink: #1A1A1A;
+      --color-text: #2C2C2C;
+      --color-text-secondary: #6B6B6B;
+      --color-text-muted: #9A9A9A;
+      --color-bg: #FAF8F5;
+      --color-bg-warm: #F0EBE5;
+      --color-card: #FFFFFF;
+      --color-border: #E0D8D0;
+      --color-border-light: #EDE8E3;
       --font-display-zh: 'Noto Serif SC', serif;
       --font-display-en: 'Playfair Display', serif;
       --font-body-zh: 'Noto Sans SC', sans-serif;
@@ -39,41 +39,40 @@
     body::before {
       content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background-image:
-        radial-gradient(ellipse at 20% 0%, rgba(212,162,74,0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 100%, rgba(184,57,46,0.04) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 0%, rgba(196,154,154,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(196,154,154,0.04) 0%, transparent 50%);
       pointer-events: none; z-index: 0;
     }
     .hero {
-      position: relative; padding: 48px 20px 36px; text-align: center;
-      background: linear-gradient(180deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
-      color: #fff; overflow: hidden;
+      position: relative; padding: 32px 20px 28px; text-align: center;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAF6F3 100%);
+      color: var(--color-ink); overflow: hidden;
+      border-bottom: 1px solid var(--color-border-light);
     }
     .hero::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background-image:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 40%),
-        radial-gradient(circle at 70% 80%, rgba(212,162,74,0.15) 0%, transparent 40%);
+        radial-gradient(ellipse at 20% 30%, rgba(196,154,154,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(196,154,154,0.06) 0%, transparent 50%);
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; }
     .logo-placeholder {
-      width: 64px; height: 64px; margin: 0 auto 16px;
-      border: 1.5px solid var(--color-gold); border-radius: 50%;
+      width: 100%; max-width: 360px; margin: 0 auto 12px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.05);
     }
-    .logo-placeholder svg { width: 32px; height: 32px; stroke: var(--color-gold-light); }
+    .logo-placeholder img { width: 100%; height: auto; display: block; }
     .restaurant-name-zh {
-      font-family: var(--font-display-zh); font-size: 28px; font-weight: 700;
-      letter-spacing: 4px; margin-bottom: 4px;
+      font-family: var(--font-display-zh); font-size: 24px; font-weight: 700;
+      letter-spacing: 4px; margin-bottom: 4px; color: var(--color-ink);
     }
     .restaurant-name-es {
-      font-family: var(--font-display-en); font-size: 18px; font-weight: 400;
-      font-style: italic; color: var(--color-gold-light); letter-spacing: 1px; margin-bottom: 20px;
+      font-family: var(--font-display-en); font-size: 16px; font-weight: 400;
+      font-style: italic; color: var(--color-text-secondary); letter-spacing: 1px; margin-bottom: 16px;
     }
     .welcome-text {
-      font-size: 13px; font-weight: 300; line-height: 1.8; opacity: 0.9;
-      max-width: 320px; margin: 0 auto;
+      font-size: 13px; font-weight: 300; line-height: 1.8; opacity: 0.8;
+      max-width: 320px; margin: 0 auto; color: var(--color-text-secondary);
     }
     .welcome-text .es {
       font-family: var(--font-body-en); font-style: italic; opacity: 0.8;
@@ -82,8 +81,8 @@
     .hero-divider {
       display: flex; align-items: center; justify-content: center; gap: 12px; margin: 24px 0 0;
     }
-    .hero-divider .line { width: 60px; height: 1px; background: var(--color-gold); opacity: 0.6; }
-    .hero-divider .diamond { width: 6px; height: 6px; background: var(--color-gold); transform: rotate(45deg); }
+    .hero-divider .line { width: 60px; height: 1px; background: var(--color-gold); opacity: 0.5; }
+    .hero-divider .diamond { width: 6px; height: 6px; background: var(--color-gold); transform: rotate(45deg); opacity: 0.6; }
     .lang-toggle {
       position: sticky; top: 0; z-index: 100; background: var(--color-bg);
       border-bottom: 1px solid var(--color-border-light); padding: 10px 16px;
@@ -102,7 +101,7 @@
     }
     .lang-btn.active { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-sm); }
     .category-nav {
-      position: sticky; top: 45px; z-index: 99; background: var(--color-bg);
+      position: sticky; top: 0; z-index: 99; background: var(--color-bg);
       border-bottom: 1px solid var(--color-border-light); padding: 10px 12px;
       overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
@@ -118,12 +117,12 @@
     .cat-nav-item.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
     .cat-nav-item.active .cat-nav-es { opacity: 0.85; }
     .main-content { position: relative; z-index: 1; padding: 24px 16px 40px; max-width: 640px; margin: 0 auto; }
-    .category-section { margin-bottom: 40px; scroll-margin-top: 110px; }
+    .category-section { margin-bottom: 40px; scroll-margin-top: 60px; }
     .category-header { text-align: center; margin-bottom: 24px; }
     .category-title-wrap { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; }
     .category-title-line { flex: 0 0 40px; height: 1px; background: var(--color-gold); opacity: 0.6; }
     .category-title-zh { font-family: var(--font-display-zh); font-size: 22px; font-weight: 700; color: var(--color-ink); letter-spacing: 3px; }
-    .category-title-es { font-family: var(--font-display-en); font-size: 16px; font-style: italic; color: var(--color-primary); letter-spacing: 0.5px; }
+    .category-title-es { font-family: var(--font-display-en); font-size: 22px; font-weight: 700; color: var(--color-ink); letter-spacing: 1px; }
     .category-subtitle { font-size: 12px; color: var(--color-text-muted); font-weight: 300; margin-top: 4px; }
     .category-decor { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; }
     .category-decor .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--color-gold); opacity: 0.5; }
@@ -144,12 +143,12 @@
     .dish-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
     .dish-names { flex: 1; min-width: 0; }
     .dish-name-zh { font-family: var(--font-display-zh); font-size: 15px; font-weight: 600; color: var(--color-ink); line-height: 1.4; }
-    .dish-name-es { font-family: var(--font-display-en); font-size: 13px; font-style: italic; color: var(--color-text-secondary); margin-top: 2px; line-height: 1.4; }
+    .dish-name-es { font-family: var(--font-display-en); font-size: 15px; font-weight: 600; color: var(--color-ink); line-height: 1.4; }
     .dish-price { flex-shrink: 0; text-align: right; }
     .price-number { font-family: var(--font-display-en); font-size: 15px; font-weight: 700; color: var(--color-primary); line-height: 1.2; white-space: nowrap; }
     .price-unit { font-family: var(--font-body-en); font-size: 10px; color: var(--color-text-muted); margin-top: 2px; }
     .dish-description { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-top: 6px; font-weight: 300; }
-    .dish-desc-es { font-family: var(--font-body-en); font-style: italic; opacity: 0.8; font-size: 11px; margin-top: 2px; }
+    .dish-desc-es { font-family: var(--font-body-en); font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
     .dish-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
     .dish-tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: var(--color-bg-warm); color: var(--color-text-secondary); font-family: var(--font-body-en); }
     .dish-tag.spicy { background: rgba(184,57,46,0.1); color: var(--color-primary); }
@@ -189,14 +188,14 @@
     .whatsapp-btn svg { width: 22px; height: 22px; fill: #fff; }
     .footer-copyright { font-size: 11px; color: rgba(255,255,255,0.35); font-family: var(--font-body-en); }
     @media (min-width: 640px) {
-      .hero { padding: 60px 20px 44px; }
+      .hero { padding: 40px 20px 32px; }
       .restaurant-name-zh { font-size: 34px; }
       .restaurant-name-es { font-size: 20px; }
       .welcome-text { font-size: 14px; max-width: 400px; }
       .main-content { padding: 32px 24px 48px; }
       .dish-card { padding: 16px 20px; }
       .dish-name-zh { font-size: 16px; }
-      .dish-name-es { font-size: 14px; }
+      .dish-name-es { font-size: 16px; }
       .price-number { font-size: 17px; }
       .dish-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
       .category-title-wrap { gap: 24px; }
@@ -223,50 +222,36 @@
     }
   </style>
 </head>
-<body class="lang-mode-bilingual">
+<body>
   <header class="hero">
     <div class="hero-content">
       <div class="logo-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L14.5 9H22L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2 9H9.5L12 2Z"/>
-        </svg>
+        <img src="https://aka.doubaocdn.com/s/1FcyECgxvG" alt="Restaurante Fortuna Logo">
       </div>
-      <h1 class="restaurant-name-zh">富城</h1>
-      <p class="restaurant-name-es">Restaurante Fortuna</p>
       <div class="hero-divider">
         <span class="line"></span><span class="diamond"></span><span class="line"></span>
       </div>
       <p class="welcome-text">
-        <span class="zh">欢迎莅临，品味中华美食精髓</span>
-        <span class="es">Bienvenido a saborear la esencia de la gastronomía china</span>
+        Bienvenido a saborear la esencia de la gastronomía china
       </p>
     </div>
   </header>
 
-  <div class="lang-toggle">
-    <span class="lang-toggle-label">语言 / Idioma:</span>
-    <div class="lang-switch">
-      <button class="lang-btn active" data-lang="bilingual">双语 Bilingüe</button>
-      <button class="lang-btn" data-lang="zh">中文</button>
-      <button class="lang-btn" data-lang="es">Español</button>
-    </div>
-  </div>
-
   <nav class="category-nav" id="categoryNav">
     <div class="category-nav-inner">
-      <button class="cat-nav-item active" data-target="arroz-frito"><span>炒饭</span><span class="cat-nav-es">Arroz Frito</span></button>
-      <button class="cat-nav-item" data-target="arroz-salsa"><span>酱汁饭</span><span class="cat-nav-es">Arroz en Salsa</span></button>
-      <button class="cat-nav-item" data-target="chop-suey-salsa"><span>酱汁杂碎</span><span class="cat-nav-es">Chop Suey Salsa</span></button>
-      <button class="cat-nav-item" data-target="chop-suey-seco"><span>干炒杂碎</span><span class="cat-nav-es">Chop Suey Seco</span></button>
-      <button class="cat-nav-item" data-target="chop-mein"><span>炒面</span><span class="cat-nav-es">Chop Mein</span></button>
-      <button class="cat-nav-item" data-target="sopas"><span>汤品</span><span class="cat-nav-es">Sopas</span></button>
-      <button class="cat-nav-item" data-target="wan-tan"><span>云吞</span><span class="cat-nav-es">Wan Tan</span></button>
-      <button class="cat-nav-item" data-target="casados"><span>套餐饭</span><span class="cat-nav-es">Casados</span></button>
-      <button class="cat-nav-item" data-target="especiales"><span>特色菜</span><span class="cat-nav-es">Especiales</span></button>
-      <button class="cat-nav-item" data-target="bocas"><span>小食</span><span class="cat-nav-es">Bocas</span></button>
-      <button class="cat-nav-item" data-target="papas-alas"><span>薯条鸡翅</span><span class="cat-nav-es">Papas y Alas</span></button>
-      <button class="cat-nav-item" data-target="combos"><span>套餐</span><span class="cat-nav-es">Combos</span></button>
-      <button class="cat-nav-item" data-target="personales"><span>个人套餐</span><span class="cat-nav-es">Personales</span></button>
+      <button class="cat-nav-item active" data-target="arroz-frito">Arroz Frito</button>
+      <button class="cat-nav-item" data-target="arroz-salsa">Arroz en Salsa</button>
+      <button class="cat-nav-item" data-target="chop-suey-salsa">Chop Suey Salsa</button>
+      <button class="cat-nav-item" data-target="chop-suey-seco">Chop Suey Seco</button>
+      <button class="cat-nav-item" data-target="chop-mein">Chop Mein</button>
+      <button class="cat-nav-item" data-target="sopas">Sopas</button>
+      <button class="cat-nav-item" data-target="wan-tan">Wan Tan</button>
+      <button class="cat-nav-item" data-target="casados">Casados</button>
+      <button class="cat-nav-item" data-target="especiales">Especiales</button>
+      <button class="cat-nav-item" data-target="bocas">Bocas</button>
+      <button class="cat-nav-item" data-target="papas-alas">Papas y Alas</button>
+      <button class="cat-nav-item" data-target="combos">Combos</button>
+      <button class="cat-nav-item" data-target="personales">Personales</button>
     </div>
   </nav>
 
@@ -274,37 +259,36 @@
 
   <footer class="footer">
     <div class="footer-logo">
-      <div class="name-zh">富城</div>
       <div class="name-es">Restaurante Fortuna</div>
     </div>
     <div class="footer-divider"></div>
     <div class="footer-info">
       <div class="footer-info-item">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <div class="info-text"><div class="info-label">Dirección / 地址</div><div>Río Segundo de Alajuela, Costa Rica</div></div>
+        <div class="info-text"><div class="info-label">Dirección</div><div>Río Segundo de Alajuela, Costa Rica</div></div>
       </div>
       <div class="footer-info-item">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <div class="info-text"><div class="info-label">Horario / 营业时间</div><div>Lunes a Domingos: 11AM - 9PM</div></div>
+        <div class="info-text"><div class="info-label">Horario</div><div>Lunes a Domingos: 11AM - 9PM</div></div>
       </div>
       <div class="footer-info-item">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <div class="info-text"><div class="info-label">Teléfono / 电话</div><div>+506 2441 5521</div></div>
+        <div class="info-text"><div class="info-label">Teléfono</div><div>+506 2441 5521</div></div>
       </div>
     </div>
     <a href="https://wa.me/50624415521" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp 点餐 / Pedir
+      Pedir por WhatsApp
     </a>
     <div class="footer-copyright">© 2024 Restaurante Fortuna · Todos los derechos reservados</div>
   </footer>
 
-  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="返回顶部">
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
   <script>
-    // 价格格式：有半份/整份的用 "3000 / 4000"，单份的用数字
+    // Formato de precios: "3000 / 4000" para medio/entero, un solo numero para entero
     const menuData = [
       { category:'arroz-frito', categoryZh:'炒饭', categoryEs:'Arroz Frito',
         subtitleZh:'半份 / 整份 · Medio / Entero', subtitleEs:'Medio / Entero',
@@ -449,12 +433,11 @@
           '<article class="dish-card">' +
             '<div class="dish-header">' +
               '<div class="dish-names">' +
-                '<h3 class="dish-name-zh">' + dish.zh + '</h3>' +
-                '<p class="dish-name-es">' + dish.es + '</p>' +
+                '<h3 class="dish-name-es">' + dish.es + '</h3>' +
               '</div>' +
               '<div class="dish-price"><span class="price-number">' + dish.price + '</span></div>' +
             '</div>' +
-            '<div class="dish-description"><span>' + dish.descZh + '</span><span class="dish-desc-es">' + dish.descEs + '</span></div>' +
+            '<div class="dish-description"><span class="dish-desc-es">' + dish.descEs + '</span></div>' +
             tagsHtml(dish.tags) +
           '</article>'
         ).join('');
@@ -463,30 +446,16 @@
             '<div class="category-header">' +
               '<div class="category-title-wrap">' +
                 '<span class="category-title-line"></span>' +
-                '<div><h2 class="category-title-zh">' + cat.categoryZh + '</h2><p class="category-title-es">' + cat.categoryEs + '</p></div>' +
+                '<div><h2 class="category-title-es">' + cat.categoryEs + '</h2></div>' +
                 '<span class="category-title-line"></span>' +
               '</div>' +
-              '<p class="category-subtitle">' + cat.subtitleZh + '</p>' +
+              '<p class="category-subtitle">' + cat.subtitleEs + '</p>' +
               '<div class="category-decor"><span class="dot"></span><span class="dot middle"></span><span class="dot"></span></div>' +
             '</div>' +
             '<div class="dish-list">' + dishesHtml + '</div>' +
           '</section>';
       });
       container.innerHTML = html;
-    }
-
-    function initLangToggle() {
-      const buttons = document.querySelectorAll('.lang-btn');
-      const body = document.body;
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const lang = btn.dataset.lang;
-          buttons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          body.classList.remove('lang-mode-bilingual', 'lang-mode-zh', 'lang-mode-es');
-          body.classList.add('lang-mode-' + lang);
-        });
-      });
     }
 
     function initCategoryNav() {
@@ -516,7 +485,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       renderDishes();
-      initLangToggle();
       initCategoryNav();
       initScrollTop();
     });
