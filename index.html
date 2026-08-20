@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>菜单 · Carta | 富城 Restaurante Fortuna</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap">
+  <style>
+    :root {
+      --color-primary: #B8392E;
+      --color-primary-dark: #8F2B22;
+      --color-gold: #D4A24A;
+      --color-gold-light: #E8C87A;
+      --color-ink: #1A1410;
+      --color-text: #2C1F17;
+      --color-text-secondary: #6B5D52;
+      --color-text-muted: #9A8B7E;
+      --color-bg: #F5EFE6;
+      --color-bg-warm: #EDE4D3;
+      --color-card: #FAF6EF;
+      --color-border: #D9CDBC;
+      --color-border-light: #E8DDCC;
+      --font-display-zh: 'Noto Serif SC', serif;
+      --font-display-en: 'Playfair Display', serif;
+      --font-body-zh: 'Noto Sans SC', sans-serif;
+      --font-body-en: 'Lato', sans-serif;
+      --radius-md: 8px;
+      --shadow-sm: 0 1px 2px rgba(44,31,23,0.06);
+      --shadow-md: 0 4px 16px rgba(44,31,23,0.08);
+      --shadow-lg: 0 8px 32px rgba(44,31,23,0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-body-zh), var(--font-body-en), sans-serif;
+      background: var(--color-bg); color: var(--color-text);
+      line-height: 1.6; font-size: 15px; min-height: 100vh; position: relative;
+    }
+    body::before {
+      content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(212,162,74,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(184,57,46,0.04) 0%, transparent 50%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero {
+      position: relative; padding: 48px 20px 36px; text-align: center;
+      background: linear-gradient(180deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+      color: #fff; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(212,162,74,0.15) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; }
+    .logo-placeholder {
+      width: 64px; height: 64px; margin: 0 auto 16px;
+      border: 1.5px solid var(--color-gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05);
+    }
+    .logo-placeholder svg { width: 32px; height: 32px; stroke: var(--color-gold-light); }
+    .restaurant-name-zh {
+      font-family: var(--font-display-zh); font-size: 28px; font-weight: 700;
+      letter-spacing: 4px; margin-bottom: 4px;
+    }
+    .restaurant-name-es {
+      font-family: var(--font-display-en); font-size: 18px; font-weight: 400;
+      font-style: italic; color: var(--color-gold-light); letter-spacing: 1px; margin-bottom: 20px;
+    }
+    .welcome-text {
+      font-size: 13px; font-weight: 300; line-height: 1.8; opacity: 0.9;
+      max-width: 320px; margin: 0 auto;
+    }
+    .welcome-text .es {
+      font-family: var(--font-body-en); font-style: italic; opacity: 0.8;
+      display: block; margin-top: 2px;
+    }
+    .hero-divider {
+      display: flex; align-items: center; justify-content: center; gap: 12px; margin: 24px 0 0;
+    }
+    .hero-divider .line { width: 60px; height: 1px; background: var(--color-gold); opacity: 0.6; }
+    .hero-divider .diamond { width: 6px; height: 6px; background: var(--color-gold); transform: rotate(45deg); }
+    .lang-toggle {
+      position: sticky; top: 0; z-index: 100; background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border-light); padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-toggle-label { font-size: 12px; color: var(--color-text-secondary); margin-right: 4px; }
+    .lang-switch {
+      display: flex; background: var(--color-card); border: 1px solid var(--color-border);
+      border-radius: 20px; padding: 3px; gap: 2px;
+    }
+    .lang-btn {
+      border: none; background: transparent; padding: 6px 14px; font-size: 12px;
+      font-family: inherit; color: var(--color-text-secondary); border-radius: 16px;
+      cursor: pointer; transition: all 0.25s ease; white-space: nowrap;
+    }
+    .lang-btn.active { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-sm); }
+    .category-nav {
+      position: sticky; top: 45px; z-index: 99; background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border-light); padding: 10px 12px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .category-nav::-webkit-scrollbar { display: none; }
+    .category-nav-inner { display: flex; gap: 8px; min-width: max-content; justify-content: flex-start; }
+    .cat-nav-item {
+      flex-shrink: 0; padding: 7px 14px; font-size: 13px; color: var(--color-text-secondary);
+      background: var(--color-card); border: 1px solid var(--color-border); border-radius: 20px;
+      cursor: pointer; transition: all 0.25s ease; font-family: var(--font-body-zh);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .cat-nav-item .cat-nav-es { font-family: var(--font-body-en); font-size: 11px; opacity: 0.7; font-style: italic; }
+    .cat-nav-item.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+    .cat-nav-item.active .cat-nav-es { opacity: 0.85; }
+    .main-content { position: relative; z-index: 1; padding: 24px 16px 40px; max-width: 640px; margin: 0 auto; }
+    .category-section { margin-bottom: 40px; scroll-margin-top: 110px; }
+    .category-header { text-align: center; margin-bottom: 24px; }
+    .category-title-wrap { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; }
+    .category-title-line { flex: 0 0 40px; height: 1px; background: var(--color-gold); opacity: 0.6; }
+    .category-title-zh { font-family: var(--font-display-zh); font-size: 22px; font-weight: 700; color: var(--color-ink); letter-spacing: 3px; }
+    .category-title-es { font-family: var(--font-display-en); font-size: 16px; font-style: italic; color: var(--color-primary); letter-spacing: 0.5px; }
+    .category-subtitle { font-size: 12px; color: var(--color-text-muted); font-weight: 300; margin-top: 4px; }
+    .category-decor { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; }
+    .category-decor .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--color-gold); opacity: 0.5; }
+    .category-decor .dot.middle { width: 6px; height: 6px; opacity: 0.8; }
+    .dish-list { display: flex; flex-direction: column; gap: 12px; }
+    .dish-card {
+      background: var(--color-card); border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md); padding: 14px 16px; transition: all 0.25s ease;
+      position: relative; overflow: hidden;
+    }
+    .dish-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--color-primary), var(--color-gold));
+      opacity: 0; transition: opacity 0.25s ease;
+    }
+    .dish-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-border); transform: translateY(-1px); }
+    .dish-card:hover::before { opacity: 1; }
+    .dish-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
+    .dish-names { flex: 1; min-width: 0; }
+    .dish-name-zh { font-family: var(--font-display-zh); font-size: 15px; font-weight: 600; color: var(--color-ink); line-height: 1.4; }
+    .dish-name-es { font-family: var(--font-display-en); font-size: 13px; font-style: italic; color: var(--color-text-secondary); margin-top: 2px; line-height: 1.4; }
+    .dish-price { flex-shrink: 0; text-align: right; }
+    .price-number { font-family: var(--font-display-en); font-size: 15px; font-weight: 700; color: var(--color-primary); line-height: 1.2; white-space: nowrap; }
+    .price-unit { font-family: var(--font-body-en); font-size: 10px; color: var(--color-text-muted); margin-top: 2px; }
+    .dish-description { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-top: 6px; font-weight: 300; }
+    .dish-desc-es { font-family: var(--font-body-en); font-style: italic; opacity: 0.8; font-size: 11px; margin-top: 2px; }
+    .dish-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .dish-tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: var(--color-bg-warm); color: var(--color-text-secondary); font-family: var(--font-body-en); }
+    .dish-tag.spicy { background: rgba(184,57,46,0.1); color: var(--color-primary); }
+    .dish-tag.veggie { background: rgba(46,139,87,0.1); color: #2E8B57; }
+    .dish-tag.recommend { background: rgba(212,162,74,0.15); color: #B8860B; }
+    .lang-mode-bilingual .dish-name-es, .lang-mode-bilingual .dish-desc-es,
+    .lang-mode-bilingual .category-title-es, .lang-mode-bilingual .cat-nav-es,
+    .lang-mode-bilingual .restaurant-name-es, .lang-mode-bilingual .welcome-text .es { display: block; }
+    .lang-mode-zh .dish-name-es, .lang-mode-zh .dish-desc-es,
+    .lang-mode-zh .category-title-es, .lang-mode-zh .cat-nav-es,
+    .lang-mode-zh .restaurant-name-es, .lang-mode-zh .welcome-text .es { display: none; }
+    .lang-mode-es .dish-name-zh, .lang-mode-es .category-title-zh,
+    .lang-mode-es .cat-nav-item > span:first-child, .lang-mode-es .restaurant-name-zh,
+    .lang-mode-es .welcome-text .zh { display: none; }
+    .lang-mode-es .dish-desc-es { display: block; }
+    .lang-mode-es .dish-description > span:not(.dish-desc-es) { display: none; }
+    .lang-mode-es .dish-description .dish-desc-es { font-size: 12px; font-style: normal; opacity: 1; }
+    .footer {
+      position: relative; z-index: 1; background: var(--color-ink);
+      color: rgba(255,255,255,0.85); padding: 40px 20px 28px; text-align: center;
+    }
+    .footer-logo { margin-bottom: 16px; }
+    .footer-logo .name-zh { font-family: var(--font-display-zh); font-size: 20px; font-weight: 600; color: #fff; letter-spacing: 3px; }
+    .footer-logo .name-es { font-family: var(--font-display-en); font-style: italic; font-size: 14px; color: var(--color-gold-light); margin-top: 2px; }
+    .footer-divider { width: 40px; height: 1px; background: var(--color-gold); margin: 16px auto; opacity: 0.5; }
+    .footer-info { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .footer-info-item { display: flex; align-items: flex-start; justify-content: center; gap: 10px; }
+    .footer-info-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; stroke: var(--color-gold-light); opacity: 0.8; }
+    .footer-info-item .info-text { text-align: left; }
+    .footer-info-item .info-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-body-en); }
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff;
+      padding: 14px 28px; border-radius: 30px; text-decoration: none; font-size: 15px;
+      font-weight: 500; transition: all 0.25s ease; box-shadow: 0 4px 16px rgba(37,211,102,0.3); margin-bottom: 28px;
+    }
+    .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.4); background: #1fb855; }
+    .whatsapp-btn svg { width: 22px; height: 22px; fill: #fff; }
+    .footer-copyright { font-size: 11px; color: rgba(255,255,255,0.35); font-family: var(--font-body-en); }
+    @media (min-width: 640px) {
+      .hero { padding: 60px 20px 44px; }
+      .restaurant-name-zh { font-size: 34px; }
+      .restaurant-name-es { font-size: 20px; }
+      .welcome-text { font-size: 14px; max-width: 400px; }
+      .main-content { padding: 32px 24px 48px; }
+      .dish-card { padding: 16px 20px; }
+      .dish-name-zh { font-size: 16px; }
+      .dish-name-es { font-size: 14px; }
+      .price-number { font-size: 17px; }
+      .dish-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .category-title-wrap { gap: 24px; }
+      .category-title-line { flex-basis: 80px; }
+      .footer-info { max-width: 480px; margin-left: auto; margin-right: auto; }
+    }
+    @media (min-width: 900px) {
+      .dish-list { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .main-content { max-width: 800px; }
+    }
+    .scroll-top-btn {
+      position: fixed; right: 16px; bottom: 24px; width: 44px; height: 44px;
+      border-radius: 50%; background: var(--color-primary); color: #fff; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(10px);
+      transition: all 0.3s ease; pointer-events: none; z-index: 200;
+    }
+    .scroll-top-btn.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .scroll-top-btn svg { width: 20px; height: 20px; stroke: #fff; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .dish-card { animation: fadeInUp 0.4s ease both; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body class="lang-mode-bilingual">
+  <header class="hero">
+    <div class="hero-content">
+      <div class="logo-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L14.5 9H22L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2 9H9.5L12 2Z"/>
+        </svg>
+      </div>
+      <h1 class="restaurant-name-zh">富城</h1>
+      <p class="restaurant-name-es">Restaurante Fortuna</p>
+      <div class="hero-divider">
+        <span class="line"></span><span class="diamond"></span><span class="line"></span>
+      </div>
+      <p class="welcome-text">
+        <span class="zh">欢迎莅临，品味中华美食精髓</span>
+        <span class="es">Bienvenido a saborear la esencia de la gastronomía china</span>
+      </p>
+    </div>
+  </header>
+
+  <div class="lang-toggle">
+    <span class="lang-toggle-label">语言 / Idioma:</span>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="bilingual">双语 Bilingüe</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+      <button class="lang-btn" data-lang="es">Español</button>
+    </div>
+  </div>
+
+  <nav class="category-nav" id="categoryNav">
+    <div class="category-nav-inner">
+      <button class="cat-nav-item active" data-target="arroz-frito"><span>炒饭</span><span class="cat-nav-es">Arroz Frito</span></button>
+      <button class="cat-nav-item" data-target="arroz-salsa"><span>酱汁饭</span><span class="cat-nav-es">Arroz en Salsa</span></button>
+      <button class="cat-nav-item" data-target="chop-suey-salsa"><span>酱汁杂碎</span><span class="cat-nav-es">Chop Suey Salsa</span></button>
+      <button class="cat-nav-item" data-target="chop-suey-seco"><span>干炒杂碎</span><span class="cat-nav-es">Chop Suey Seco</span></button>
+      <button class="cat-nav-item" data-target="chop-mein"><span>炒面</span><span class="cat-nav-es">Chop Mein</span></button>
+      <button class="cat-nav-item" data-target="sopas"><span>汤品</span><span class="cat-nav-es">Sopas</span></button>
+      <button class="cat-nav-item" data-target="wan-tan"><span>云吞</span><span class="cat-nav-es">Wan Tan</span></button>
+      <button class="cat-nav-item" data-target="casados"><span>套餐饭</span><span class="cat-nav-es">Casados</span></button>
+      <button class="cat-nav-item" data-target="especiales"><span>特色菜</span><span class="cat-nav-es">Especiales</span></button>
+      <button class="cat-nav-item" data-target="bocas"><span>小食</span><span class="cat-nav-es">Bocas</span></button>
+      <button class="cat-nav-item" data-target="papas-alas"><span>薯条鸡翅</span><span class="cat-nav-es">Papas y Alas</span></button>
+      <button class="cat-nav-item" data-target="combos"><span>套餐</span><span class="cat-nav-es">Combos</span></button>
+      <button class="cat-nav-item" data-target="personales"><span>个人套餐</span><span class="cat-nav-es">Personales</span></button>
+    </div>
+  </nav>
+
+  <main class="main-content" id="dishContainer"></main>
+
+  <footer class="footer">
+    <div class="footer-logo">
+      <div class="name-zh">富城</div>
+      <div class="name-es">Restaurante Fortuna</div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-info">
+      <div class="footer-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="info-text"><div class="info-label">Dirección / 地址</div><div>Río Segundo de Alajuela, Costa Rica</div></div>
+      </div>
+      <div class="footer-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="info-text"><div class="info-label">Horario / 营业时间</div><div>Lunes a Domingos: 11AM - 9PM</div></div>
+      </div>
+      <div class="footer-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div class="info-text"><div class="info-label">Teléfono / 电话</div><div>+506 2441 5521</div></div>
+      </div>
+    </div>
+    <a href="https://wa.me/50624415521" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp 点餐 / Pedir
+    </a>
+    <div class="footer-copyright">© 2024 Restaurante Fortuna · Todos los derechos reservados</div>
+  </footer>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    // 价格格式：有半份/整份的用 "3000 / 4000"，单份的用数字
+    const menuData = [
+      { category:'arroz-frito', categoryZh:'炒饭', categoryEs:'Arroz Frito',
+        subtitleZh:'半份 / 整份 · Medio / Entero', subtitleEs:'Medio / Entero',
+        dishes:[
+          { zh:'素食炒饭', es:'Arroz vegetariano', price:'₡3000 / 4000', descZh:'新鲜蔬菜炒制', descEs:'Arroz frito con verduras frescas', tags:[{text:'Vegetariano',type:'veggie'}] },
+          { zh:'招牌炒饭', es:'Arroz de la casa', price:'₡3700 / 4700', descZh:'火腿、鸡肉、烧肉、腊肠、虾仁', descEs:'Jamón, pollo, lechón, chorizo, camarón', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'广东炒饭', es:'Arroz cantones', price:'₡3000 / 4000', descZh:'经典广式炒饭', descEs:'Clásico arroz cantones', tags:[] },
+          { zh:'鸡虾炒饭', es:'Arroz con pollo y camarones', price:'₡3700 / 4700', descZh:'鸡肉与虾仁同炒', descEs:'Pollo y camarones', tags:[] },
+          { zh:'鸡肉炒饭', es:'Arroz con pollo', price:'₡3200 / 4200', descZh:'嫩滑鸡肉炒饭', descEs:'Tierno pollo', tags:[] },
+          { zh:'虾仁炒饭', es:'Arroz con camarones', price:'₡4100 / 5100', descZh:'鲜美虾仁炒饭', descEs:'Jugosos camarones', tags:[] },
+          { zh:'腊肠炒饭', es:'Arroz Frito con chorizo chino', price:'₡3500 / 4500', descZh:'中式腊肠香气四溢', descEs:'Chorizo chino', tags:[] },
+          { zh:'腊肠虾仁炒饭', es:'Arroz con chorizo chino y camarones', price:'₡4000 / 5000', descZh:'腊肠配虾仁', descEs:'Chorizo chino y camarones', tags:[] },
+          { zh:'腊肠鸡肉炒饭', es:'Arroz con chorizo chino y pollo', price:'₡3500 / 4500', descZh:'腊肠配鸡肉', descEs:'Chorizo chino y pollo', tags:[] },
+          { zh:'烧肉炒饭', es:'Arroz con lechón', price:'₡3300 / 4300', descZh:'脆皮烧肉炒饭', descEs:'Lechón crujiente', tags:[] },
+          { zh:'牛肉炒饭', es:'Arroz con carne de res', price:'₡4000 / 5000', descZh:'鲜嫩牛肉炒饭', descEs:'Tierna carne de res', tags:[] }
+        ]},
+      { category:'arroz-salsa', categoryZh:'酱汁饭', categoryEs:'Arroz en Salsa',
+        subtitleZh:'半份 / 整份 · Medio / Entero', subtitleEs:'Medio / Entero',
+        dishes:[
+          { zh:'酱汁鸡虾蔬菜烩饭', es:'Arroz blanco con pollo camarón y verduras en salsa', price:'₡3700 / 4700', descZh:'白饭配鸡肉虾仁蔬菜酱汁', descEs:'Pollo, camarón y verduras en salsa', tags:[] },
+          { zh:'酱汁牛肉蔬菜烩饭', es:'Arroz blanco con carne de res verduras en salsa', price:'₡4000 / 5000', descZh:'白饭配牛肉蔬菜酱汁', descEs:'Carne de res y verduras en salsa', tags:[] },
+          { zh:'酱汁鸡肉蔬菜烩饭', es:'Arroz blanco con pollo verduras en salsa', price:'₡3200 / 4200', descZh:'白饭配鸡肉蔬菜酱汁', descEs:'Pollo y verduras en salsa', tags:[] },
+          { zh:'酱汁虾仁蔬菜烩饭', es:'Arroz blanco con camarones y verduras en salsa', price:'₡4100 / 5100', descZh:'白饭配虾仁蔬菜酱汁', descEs:'Camarones y verduras en salsa', tags:[] },
+          { zh:'咖喱鸡肉土豆烩饭', es:'Arroz blanco con pollo y papas en salsa curry', price:'₡3100 / 4100', descZh:'咖喱酱汁配鸡肉土豆', descEs:'Pollo y papas en salsa curry', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'咖喱牛肉土豆烩饭', es:'Arroz blanco con carne de res y papas en salsa curry', price:'₡4200 / 5200', descZh:'咖喱酱汁配牛肉土豆', descEs:'Carne de res y papas en salsa curry', tags:[] }
+        ]},
+      { category:'chop-suey-salsa', categoryZh:'酱汁杂碎', categoryEs:'Chop Suey en Salsa',
+        subtitleZh:'半份 / 整份 · Medio / Entero', subtitleEs:'Medio / Entero',
+        dishes:[
+          { zh:'招牌酱汁杂碎', es:'Chop suey de la casa en salsa', price:'₡3700 / 4700', descZh:'招牌配方酱汁杂碎', descEs:'Receta de la casa', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'酱汁杂碎', es:'Chop suey en salsa', price:'₡3000 / 4000', descZh:'经典酱汁杂碎', descEs:'Clásico chop suey en salsa', tags:[] },
+          { zh:'酱汁鸡肉杂碎', es:'Chop suey con pollo y verduras en salsa', price:'₡3200 / 4200', descZh:'鸡肉蔬菜酱汁杂碎', descEs:'Pollo y verduras en salsa', tags:[] },
+          { zh:'酱汁牛肉杂碎', es:'Chop suey con carne de res y verduras en salsa', price:'₡4000 / 5000', descZh:'牛肉蔬菜酱汁杂碎', descEs:'Carne de res y verduras en salsa', tags:[] },
+          { zh:'酱汁烧肉杂碎', es:'Chop suey con lechón y verduras en salsa', price:'₡3300 / 4300', descZh:'烧肉蔬菜酱汁杂碎', descEs:'Lechón y verduras en salsa', tags:[] },
+          { zh:'酱汁虾仁杂碎', es:'Chop suey con camarón y verduras en salsa', price:'₡4100 / 5100', descZh:'虾仁蔬菜酱汁杂碎', descEs:'Camarón y verduras en salsa', tags:[] }
+        ]},
+      { category:'chop-suey-seco', categoryZh:'干炒杂碎', categoryEs:'Chop Suey Seco',
+        subtitleZh:'半份 / 整份 · Medio / Entero', subtitleEs:'Medio / Entero',
+        dishes:[
+          { zh:'干炒杂碎', es:'Chop suey seco', price:'₡3500 / 4500', descZh:'经典干炒杂碎', descEs:'Clásico chop suey seco', tags:[] },
+          { zh:'招牌干炒杂碎', es:'Chop suey seco de la casa', price:'₡4200 / 5200', descZh:'招牌配方干炒杂碎', descEs:'Receta de la casa', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'干炒鸡肉杂碎', es:'Chop suey seco con pollo', price:'₡4000 / 5000', descZh:'鸡肉干炒杂碎', descEs:'Con pollo', tags:[] },
+          { zh:'干炒虾仁杂碎', es:'Chop suey seco con camarón', price:'₡4700 / 5700', descZh:'虾仁干炒杂碎', descEs:'Con camarón', tags:[] },
+          { zh:'干炒烧肉杂碎', es:'Chop suey seco con lechón', price:'₡3800 / 4800', descZh:'烧肉干炒杂碎', descEs:'Con lechón', tags:[] },
+          { zh:'干炒牛肉杂碎', es:'Chop suey seco con carne de res', price:'₡4600 / 5600', descZh:'牛肉干炒杂碎', descEs:'Con carne de res', tags:[] },
+          { zh:'干炒腊肠杂碎', es:'Chop suey seco con chorizo chino', price:'₡4200 / 5200', descZh:'中式腊肠干炒杂碎', descEs:'Con chorizo chino', tags:[] }
+        ]},
+      { category:'chop-mein', categoryZh:'炒面', categoryEs:'Chop Mein',
+        subtitleZh:'半份 / 整份 · Medio / Entero', subtitleEs:'Medio / Entero',
+        dishes:[
+          { zh:'招牌炒面', es:'Chop mein de la casa', price:'₡3800 / 4800', descZh:'招牌配方炒面', descEs:'Receta de la casa', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'鸡肉炒面', es:'Chop mein con pollo', price:'₡4000 / 5000', descZh:'嫩滑鸡肉炒面', descEs:'Con pollo', tags:[] },
+          { zh:'虾仁炒面', es:'Chop mein con camarón', price:'₡4600 / 5600', descZh:'鲜美虾仁炒面', descEs:'Con camarón', tags:[] }
+        ]},
+      { category:'sopas', categoryZh:'汤品', categoryEs:'Sopas',
+        subtitleZh:'整份 · Entero', subtitleEs:'Entero',
+        dishes:[
+          { zh:'蛋花汤', es:'Consomé con huevo', price:'₡3400', descZh:'清爽蛋花汤', descEs:'Claro consomé con huevo', tags:[] },
+          { zh:'鸡汤', es:'Sopa de pollo', price:'₡4000', descZh:'滋补鸡汤', descEs:'Reconfortante sopa de pollo', tags:[] },
+          { zh:'牛肉汤', es:'Sopa de carne de res', price:'₡4900', descZh:'浓郁牛肉汤', descEs:'Sustanciosa sopa de res', tags:[] },
+          { zh:'招牌汤', es:'Sopa de la casa', price:'₡3700', descZh:'招牌配方汤品', descEs:'Receta de la casa', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'虾仁汤', es:'Sopa de camarón', price:'₡5100', descZh:'鲜美虾仁汤', descEs:'Deliciosa sopa de camarón', tags:[] }
+        ]},
+      { category:'wan-tan', categoryZh:'云吞', categoryEs:'Wan Tan',
+        subtitleZh:'5个 / 8个 · 5 u / 8 u', subtitleEs:'5 u / 8 u',
+        dishes:[
+          { zh:'鸡肉云吞汤', es:'Sopa de Wan tan relleno con pollo', price:'₡3900 / 4900', descZh:'鸡肉馅云吞汤（5个/8个）', descEs:'Relleno de pollo (5 u / 8 u)', tags:[] },
+          { zh:'炸鸡肉云吞', es:'Wan tan Frito relleno con pollo', price:'₡3500 / 4300', descZh:'酥脆炸鸡肉云吞（5个/8个）', descEs:'Frito relleno de pollo (5 u / 8 u)', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'炸虾仁云吞', es:'Wan tan Frito relleno con camarón', price:'₡3700 / 4500', descZh:'酥脆炸虾仁云吞（5个/8个）', descEs:'Frito relleno de camarón (5 u / 8 u)', tags:[] }
+        ]},
+      { category:'casados', categoryZh:'套餐饭', categoryEs:'Casados',
+        subtitleZh:'含沙拉、薯条、广东炒饭、饮料354ml', subtitleEs:'Incluye ensalada, papas, cantones, bebida 354ml',
+        dishes:[
+          { zh:'炸虾套餐饭', es:'Casado con camarón Frito empanizado', price:'₡5000', descZh:'炸虾配沙拉、薯条、广东炒饭、饮料', descEs:'Camarón frito empanizado', tags:[] },
+          { zh:'炸鸡套餐饭', es:'Casado con carne de pollo empanizado', price:'₡5000', descZh:'炸鸡配沙拉、薯条、广东炒饭、饮料', descEs:'Pollo empanizado', tags:[] },
+          { zh:'炸猪排套餐饭', es:'Casado con chuleta Frito empanizado', price:'₡5000', descZh:'炸猪排配沙拉、薯条、广东炒饭、饮料', descEs:'Chuleta frita empanizada', tags:[] },
+          { zh:'中式套餐饭', es:'Casado chino', price:'₡5200', descZh:'广东炒饭+酱汁杂碎+饮料', descEs:'Cantones, chop suey en salsa, bebida', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'炸鱼套餐饭', es:'Casado con Pescado Frito empanizado', price:'₡5000', descZh:'炸鱼配沙拉、薯条、广东炒饭、饮料', descEs:'Pescado frito empanizado', tags:[] },
+          { zh:'中式卷饼套餐饭', es:'Casado con Taco chino', price:'₡5000', descZh:'中式卷饼配沙拉、薯条、广东炒饭、饮料', descEs:'Taco chino', tags:[] }
+        ]},
+      { category:'especiales', categoryZh:'特色菜', categoryEs:'Platos Especiales',
+        subtitleZh:'附米饭或薯条及饮料', subtitleEs:'Incluye arroz/papas y bebida',
+        dishes:[
+          { zh:'蚝油鸡肉蔬菜', es:'Pollo con Vegetales en salsa ostión', price:'₡4800', descZh:'蚝油酱汁鸡肉蔬菜，配白饭+饮料', descEs:'Salsa ostión, arroz blanco y bebida', tags:[] },
+          { zh:'蚝油牛肉蔬菜', es:'Carne de Res con Vegetales en salsa ostión', price:'₡4800', descZh:'蚝油酱汁牛肉蔬菜，配白饭+饮料', descEs:'Salsa ostión, arroz blanco y bebida', tags:[] },
+          { zh:'蚝油虾仁蔬菜', es:'Camarones con Vegetales en salsa ostión', price:'₡4800', descZh:'蚝油酱汁虾仁蔬菜（15只），配白饭+饮料', descEs:'15 camarones, arroz blanco y bebida', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'糖醋鸡肉', es:'Pollo en salsa Agridulce', price:'₡4900', descZh:'酸甜酱汁鸡肉，配薯条+饮料', descEs:'Salsa agridulce, papas fritas y bebida', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'炸虾仁', es:'Camarones Fritos empanizado', price:'₡5000', descZh:'酥脆炸虾仁（15只），配沙拉+薯条+饮料', descEs:'15 camarones empanizados, ensalada, papas y bebida', tags:[] },
+          { zh:'蒜香虾仁', es:'Camarones Fritos al Ajillo', price:'₡5000', descZh:'蒜香虾仁（15只），配沙拉+薯条+饮料', descEs:'15 camarones al ajillo, ensalada, papas y bebida', tags:[] },
+          { zh:'茄汁虾仁', es:'Camarones Fritos en salsa tomate', price:'₡5000', descZh:'番茄酱汁虾仁（15只），配沙拉+薯条+饮料', descEs:'15 camarones en salsa tomate, ensalada, papas y bebida', tags:[] },
+          { zh:'特色酱汁鱼片', es:'Filete de pescado frito en salsa especial', price:'₡5000', descZh:'特色酱汁鱼片，配沙拉+薯条+饮料', descEs:'Salsa especial, ensalada, papas y bebida', tags:[] },
+          { zh:'炸鱼片', es:'Filete de pescado frito empanizado', price:'₡5000', descZh:'酥脆炸鱼片，配沙拉+薯条+饮料', descEs:'Empanizado, ensalada, papas y bebida', tags:[] }
+        ]},
+      { category:'bocas', categoryZh:'小食', categoryEs:'Bocas',
+        subtitleZh:'开胃小食', subtitleEs:'Aperitivos',
+        dishes:[
+          { zh:'炸鱼小食', es:'Boca de Pescado Fritas', price:'₡2500', descZh:'罗非鱼排+薯条', descEs:'Filete de tilapia y papas fritas', tags:[] },
+          { zh:'广东炒饭小食', es:'Boca Cantones', price:'₡2500', descZh:'小份广东炒饭', descEs:'Porción pequeña de cantones', tags:[] },
+          { zh:'酱汁杂碎小食', es:'Boca Chop Suey en salsa', price:'₡2500', descZh:'小份酱汁杂碎', descEs:'Porción pequeña de chop suey en salsa', tags:[] },
+          { zh:'鸡肉炒饭小食', es:'Boca Arroz con Pollo', price:'₡2800', descZh:'小份鸡肉炒饭', descEs:'Porción pequeña de arroz con pollo', tags:[] },
+          { zh:'虾仁炒饭小食', es:'Boca Arroz con Camarón', price:'₡3000', descZh:'小份虾仁炒饭', descEs:'Porción pequeña de arroz con camarón', tags:[] },
+          { zh:'糖醋中式卷饼', es:'Taco Chino con Salsa Agridulce', price:'₡3400 / 4400', descZh:'3个 / 5个', descEs:'3 u / 5 u', tags:[{text:'推荐',type:'recommend'}] }
+        ]},
+      { category:'papas-alas', categoryZh:'薯条鸡翅', categoryEs:'Papas y Alas',
+        subtitleZh:'薯条与鸡翅', subtitleEs:'Papas fritas y alas',
+        dishes:[
+          { zh:'大薯条', es:'Papas grandes', price:'₡3300', descZh:'大份薯条', descEs:'Porción grande', tags:[] },
+          { zh:'中薯条', es:'Papas Medianas', price:'₡2800', descZh:'中份薯条', descEs:'Porción mediana', tags:[] },
+          { zh:'小薯条', es:'Papas Pequeñas', price:'₡1800', descZh:'小份薯条', descEs:'Porción pequeña', tags:[] },
+          { zh:'鸡翅配薯条', es:'Alas con papas', price:'₡3000', descZh:'鸡翅配薯条', descEs:'Alas de pollo con papas fritas', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'鸡翅薯条特惠', es:'Promo de alas con papas Fritas', price:'₡3000', descZh:'特惠鸡翅配薯条', descEs:'Promoción especial', tags:[] }
+        ]},
+      { category:'combos', categoryZh:'套餐', categoryEs:'Combos',
+        subtitleZh:'多人分享套餐', subtitleEs:'Combos para compartir',
+        dishes:[
+          { zh:'C1 双份广东炒饭套餐', es:'C1 Dos Entero Cantones y Bebidas Grande', price:'₡9800', descZh:'双份整份广东炒饭+大杯饮料', descEs:'2 enteros de cantones + bebida grande', tags:[] },
+          { zh:'C2 炒饭+酱汁杂碎套餐', es:'C2 Entero Cantones + Entero Chop suey en salsa + Bebida Grande', price:'₡9800', descZh:'整份广东炒饭+整份酱汁杂碎+大杯饮料', descEs:'Cantones + chop suey en salsa + bebida grande', tags:[] },
+          { zh:'C3 炒饭+干炒杂碎套餐', es:'C3 Entero Cantones + Entero Chop suey seco + Bebida Grande', price:'₡10500', descZh:'整份广东炒饭+整份干炒杂碎+大杯饮料', descEs:'Cantones + chop suey seco + bebida grande', tags:[] },
+          { zh:'C4 双份炒饭+薯条套餐', es:'C4 Dos Entero Cantones + Papas Fritas Grandes + Bebidas Grandes', price:'₡13100', descZh:'双份整份广东炒饭+大薯条+大杯饮料', descEs:'2 cantones + papas grandes + bebidas grandes', tags:[] },
+          { zh:'C5 炒饭+酱汁杂碎+薯条套餐', es:'C5 Entero Cantones + Entero Chop suey en salsa + Papas Grandes + Bebida Grande', price:'₡13100', descZh:'整份广东炒饭+整份酱汁杂碎+大薯条+大杯饮料', descEs:'Cantones + chop suey salsa + papas + bebida', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'C6 炒饭+干炒杂碎+薯条套餐', es:'C6 Entero Cantones + Entero Chop suey seco + Papas Grandes + Bebida Grande', price:'₡13900', descZh:'整份广东炒饭+整份干炒杂碎+大薯条+大杯饮料', descEs:'Cantones + chop suey seco + papas + bebida', tags:[] }
+        ]},
+      { category:'personales', categoryZh:'个人套餐', categoryEs:'Platos Personales',
+        subtitleZh:'单人套餐', subtitleEs:'Para una persona',
+        dishes:[
+          { zh:'C7 半份广东炒饭套餐', es:'C7 Medio Cantones y Bebida 354mL', price:'₡3800', descZh:'半份广东炒饭+饮料354ml', descEs:'Medio cantones + bebida 354mL', tags:[] },
+          { zh:'C8 半份酱汁杂碎套餐', es:'C8 Medio Chop suey en salsa y Bebida 354mL', price:'₡3800', descZh:'半份酱汁杂碎+饮料354ml', descEs:'Medio chop suey en salsa + bebida 354mL', tags:[] },
+          { zh:'C9 半份炒饭+薯条套餐', es:'C9 Medio Cantones + Papas Fritas + Bebida 354mL', price:'₡5000', descZh:'半份广东炒饭+薯条+饮料354ml', descEs:'Medio cantones + papas + bebida 354mL', tags:[{text:'推荐',type:'recommend'}] },
+          { zh:'C10 半份干炒杂碎套餐', es:'C10 Medio Chop suey seco y Bebida 354mL', price:'₡4400', descZh:'半份干炒杂碎+饮料354ml', descEs:'Medio chop suey seco + bebida 354mL', tags:[] }
+        ]}
+    ];
+
+    function renderDishes() {
+      const container = document.getElementById('dishContainer');
+      let html = '';
+      const tagsHtml = (tags) => {
+        if (!tags || tags.length === 0) return '';
+        return '<div class="dish-tags">' + tags.map(t => '<span class="dish-tag ' + t.type + '">' + t.text + '</span>').join('') + '</div>';
+      };
+      menuData.forEach((cat) => {
+        const dishesHtml = cat.dishes.map(dish =>
+          '<article class="dish-card">' +
+            '<div class="dish-header">' +
+              '<div class="dish-names">' +
+                '<h3 class="dish-name-zh">' + dish.zh + '</h3>' +
+                '<p class="dish-name-es">' + dish.es + '</p>' +
+              '</div>' +
+              '<div class="dish-price"><span class="price-number">' + dish.price + '</span></div>' +
+            '</div>' +
+            '<div class="dish-description"><span>' + dish.descZh + '</span><span class="dish-desc-es">' + dish.descEs + '</span></div>' +
+            tagsHtml(dish.tags) +
+          '</article>'
+        ).join('');
+        html +=
+          '<section class="category-section" id="' + cat.category + '">' +
+            '<div class="category-header">' +
+              '<div class="category-title-wrap">' +
+                '<span class="category-title-line"></span>' +
+                '<div><h2 class="category-title-zh">' + cat.categoryZh + '</h2><p class="category-title-es">' + cat.categoryEs + '</p></div>' +
+                '<span class="category-title-line"></span>' +
+              '</div>' +
+              '<p class="category-subtitle">' + cat.subtitleZh + '</p>' +
+              '<div class="category-decor"><span class="dot"></span><span class="dot middle"></span><span class="dot"></span></div>' +
+            '</div>' +
+            '<div class="dish-list">' + dishesHtml + '</div>' +
+          '</section>';
+      });
+      container.innerHTML = html;
+    }
+
+    function initLangToggle() {
+      const buttons = document.querySelectorAll('.lang-btn');
+      const body = document.body;
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.dataset.lang;
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          body.classList.remove('lang-mode-bilingual', 'lang-mode-zh', 'lang-mode-es');
+          body.classList.add('lang-mode-' + lang);
+        });
+      });
+    }
+
+    function initCategoryNav() {
+      const navItems = document.querySelectorAll('.cat-nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const targetEl = document.getElementById(item.dataset.target);
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+      const sections = document.querySelectorAll('.category-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navItems.forEach(item => item.classList.toggle('active', item.dataset.target === entry.target.id));
+          }
+        });
+      }, { root: null, rootMargin: '-120px 0px -60% 0px', threshold: 0 });
+      sections.forEach(section => observer.observe(section));
+    }
+
+    function initScrollTop() {
+      const btn = document.getElementById('scrollTopBtn');
+      window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400), { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDishes();
+      initLangToggle();
+      initCategoryNav();
+      initScrollTop();
+    });
+  </script>
+</body>
+</html>
